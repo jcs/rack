@@ -29,9 +29,9 @@ module Rack
       end
 
       alias :cookie_value :public_id
+      alias :to_s :public_id
 
       def empty?; false; end
-      def to_s; raise; end
       def inspect; public_id.inspect; end
 
       private
@@ -431,7 +431,7 @@ module Rack
           def [](key)
             if key == "session_id"
               load_for_read!
-              id.public_id
+              id.public_id if id
             else
               super
             end
